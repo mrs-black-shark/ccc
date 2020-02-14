@@ -55,26 +55,26 @@ def solve():
 
 
 [n, m] = [int(s) for s in input().split(' ')]
+[p, q] = [-1, -1]
 
 comparisons = []
     
 for _ in range(n):
     comparisons.append([None] * n)
   
-counter = 0   
-for line in sys.stdin:
+counter = -1
+for line in sys.stdin.read().splitlines():
     counter = counter + 1
 
-    if counter == m:
+    if counter < m:
+        [student_tall, student_short] = [int(s) for s in line.split(' ')]
+        
+        comparisons[student_tall - 1][student_short - 1] = True
+        comparisons[student_short - 1][student_tall - 1] = False
+    elif counter == m:
+        [p, q] = [int(s) for s in line.split(' ')]
+    else:
         break
-    
-    [student_tall, student_short] = [int(s) for s in line.split(' ')]
-    
-    comparisons[student_tall - 1][student_short - 1] = True
-    comparisons[student_short - 1][student_tall - 1] = False
-    
-    
-[p, q] = [int(s) for s in input().split(' ')]
 
 
 sol = solve()
